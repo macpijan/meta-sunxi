@@ -3,8 +3,8 @@ exec_prefix=${prefix}
 libdir=${prefix}/lib
 includedir=${prefix}/include
 
-Name: glesv1
-Description: ARM Mali implementation of OpenGL ES
+Name: gles_cm
+Description: ARM Mali implementation of OpenGL ES CM
 Version: 1.1
 Requires:
 Libs: -L${libdir} -lGLESv1_CM
