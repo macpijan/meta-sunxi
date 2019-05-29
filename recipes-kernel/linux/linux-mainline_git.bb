@@ -29,3 +29,6 @@ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git;prot
         file://defconfig \
         "
 S = "${WORKDIR}/git"
+
+# just a quick workaround to get this version to build
+FILES_${KERNEL_PACKAGE_NAME}-base_append = " ${libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo"
