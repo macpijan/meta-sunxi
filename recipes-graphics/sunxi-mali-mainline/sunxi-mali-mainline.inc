@@ -56,9 +56,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 PACKAGES = "${PN} ${PN}-dev"
 
 ### default configuration
-# x11_dma_buf  for x11 DISTRO_FEATURE
-# wayland for wayland DISTRO_FEATURE
-# fbdev for directfb DISTRO_FEATURE
+# "x11_dma_buf"  for "x11" DISTRO_FEATURE
+# "wayland" for "wayland" DISTRO_FEATURE
+# "fbdev" for "directfb" DISTRO_FEATURE
 MALI_EGL_TYPE ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11_dma_buf', '', d)}${@bb.utils.contains('DISTRO_FEATURES', 'directfb', 'fbdev', '', d)}${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
 MALI_EGL_ARCH ?= "arm"
 
