@@ -17,6 +17,10 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base += "kernel-devicetree"
 
 KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
 
+# v5.2-rc2
+PV = "v5.2-rc2+git${SRCPV}"
+SRCREV_pn-${PN} = "cd6c84d8f0cdc911df435bb075ba22ce3c605b07"
+
 S = "${WORKDIR}/linux-${PV}"
 
 SRC_URI[md5sum] = "6287e6d6658e593a2978dc718f7de3f3"
