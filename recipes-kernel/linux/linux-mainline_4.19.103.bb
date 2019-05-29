@@ -34,3 +34,7 @@ SRC_URI = "https://www.kernel.org/pub/linux/kernel/v4.x/linux-${PV}.tar.xz \
 SRC_URI_append_orange-pi-zero += "\
 	file://0001-dts-orange-pi-zero-Add-wifi-support.patch \
 	"
+S = "${WORKDIR}/git"
+
+# just a quick workaround to get this version to build
+FILES_${KERNEL_PACKAGE_NAME}-base_append = " ${libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo"
