@@ -2,6 +2,8 @@ require sunxi-mali-mainline.inc
 
 SRC_URI += "git://github.com/bootlin/mali-blobs.git;protocol=https;branch=master"
 
+SRC_URI += "file://gbm-as-default-eglplatform.patch"
+
 SRCREV = "418f55585e76f375792dbebb3e97532f0c1c556d"
 
 DEPENDS += "patchelf-native"
@@ -16,9 +18,9 @@ do_install() {
     install -m 0644 ${S}/include/${MALI_INC_DIR}/GLES2/*.h ${D}${includedir}/GLES2/
     install -d -m 0755 ${D}${includedir}/KHR
     install -m 0644 ${S}/include/${MALI_INC_DIR}/KHR/*.h ${D}${includedir}/KHR/
-    if [ "${MALI_EGL_TYPE}" = "wayland" ]; then
+    # if [ "${MALI_EGL_TYPE}" = "wayland" ]; then
       install -m 0644 ${S}/include/${MALI_INC_DIR}/gbm.h ${D}${includedir}/
-    fi
+    # fi
 
     # install pkgconfig files
     install -d -m 0755 ${D}${libdir}/pkgconfig
@@ -26,14 +28,15 @@ do_install() {
     install -m 0644 ${WORKDIR}/glesv2.pc ${D}${libdir}/pkgconfig/
     install -m 0644 ${WORKDIR}/glesv1.pc ${D}${libdir}/pkgconfig/
     install -m 0644 ${WORKDIR}/glesv1_cm.pc ${D}${libdir}/pkgconfig/
-    if [ "${MALI_EGL_TYPE}" = "wayland" ]; then
+    # if [ "${MALI_EGL_TYPE}" = "wayland" ]; then
       install -m 0644 ${WORKDIR}/wayland-egl.pc ${D}${libdir}/pkgconfig/
       install -m 0644 ${WORKDIR}/gbm.pc ${D}${libdir}/pkgconfig/
-    fi
+    # fi
 
     # install Mali library
     install -d -m 0755 ${D}${libdir}
-    install -m 0644 ${S}/${PV}/${MALI_EGL_ARCH}/${MALI_EGL_TYPE}/libMali.so ${D}${libdir}
+    # install -m 0644 ${S}/${PV}/${MALI_EGL_ARCH}/${MALI_EGL_TYPE}/libMali.so ${D}${libdir}
+    install -m 0644 ${S}/${PV}/${MALI_EGL_ARCH}/wayland/libMali.so ${D}${libdir}
     # The DT_SONAME is not compiled-in the blobs. Below line fixes a bunch of
     # "file-rdeps" sanity errors. Example issue with explaination:
     # https://github.com/96boards/meta-96boards/issues/195
@@ -41,4 +44,7 @@ do_install() {
 
     # install links to Mali library
     find . -type l -exec cp -a --no-preserve=ownership {} ${D}${libdir} \;
+
+    rm ${D}${libdir}/gbm-as-default-eglplatform.patch
 }
+

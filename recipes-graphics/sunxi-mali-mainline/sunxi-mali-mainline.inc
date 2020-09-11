@@ -72,24 +72,27 @@ PACKAGES = "${PN} ${PN}-dev"
 # "fbdev" when "directfb" is present in DISTRO_FEATURES
 # "wayland" when "wayland" is present in DISTRO_FEATURES
 # error when none of the above
-python () {
-    distro_features = d.getVar('DISTRO_FEATURES', True)
+# python () {
+#     distro_features = d.getVar('DISTRO_FEATURES', True)
+# 
+#     if 'x11' in distro_features:
+#         mali_egl_type = 'x11_dma_buf'
+#         mali_inc_dir = 'x11'
+#     elif 'wayland' in distro_features:
+#         mali_egl_type = 'wayland'
+#         mali_inc_dir = 'wayland'
+#     elif 'directfb' in distro_features:
+#         mali_egl_type = 'fbdev'
+#         mali_inc_dir = 'fbdev'
+#     else:
+#         bb.error("Unable to determine MALI_EGL_TYPE. x11, wayland, fbdev not present in the DISTRO_FEATURES")
+# 
+#     d.setVar('MALI_EGL_TYPE', mali_egl_type)
+#     d.setVar('MALI_INC_DIR', mali_inc_dir)
+# }
 
-    if 'x11' in distro_features:
-        mali_egl_type = 'x11_dma_buf'
-        mali_inc_dir = 'x11'
-    elif 'wayland' in distro_features:
-        mali_egl_type = 'wayland'
-        mali_inc_dir = 'wayland'
-    elif 'directfb' in distro_features:
-        mali_egl_type = 'fbdev'
-        mali_inc_dir = 'fbdev'
-    else:
-        bb.error("Unable to determine MALI_EGL_TYPE. x11, wayland, fbdev not present in the DISTRO_FEATURES")
-
-    d.setVar('MALI_EGL_TYPE', mali_egl_type)
-    d.setVar('MALI_INC_DIR', mali_inc_dir)
-}
+MALI_EGL_TYPE ?= "wayland"
+MALI_INC_DIR ?= "wayland"
 
 MALI_EGL_ARCH ?= "arm"
 

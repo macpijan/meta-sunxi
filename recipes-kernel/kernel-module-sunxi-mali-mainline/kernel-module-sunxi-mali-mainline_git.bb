@@ -8,7 +8,7 @@ SRC_URI = "git://github.com/mripard/sunxi-mali.git;protocol=https;branch=master"
 
 PV = "r6p2"
 
-SRCREV = "76e9db284a4e892e7b69cf59220a621fd0d93093"
+SRCREV = "d7d58f514fcad320278c538fc924e34b934dc08f"
 
 SRC_URI += "file://0001-Makefile-use-KERNEL_BUILD_ARTIFACTS_DIR-for-.config-.patch"
 
